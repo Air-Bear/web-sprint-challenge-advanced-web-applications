@@ -8,9 +8,34 @@ const initialColor = {
 };
 
 const ColorList = ({ colors, updateColors, setDependency }) => {
-  console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+
+  const [addColor, setAddColor] = useState({
+    color: "",
+    code: { hex: "#" },
+    id: Date.now()
+  });
+
+  const addColorSubmitHandler = event => {
+    event.preventDefault();
+
+    axiosWithAuth().post("http://localhost:5000/api/colors/", addColor)
+    .then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
+
+    setDependency(true);
+  };
+
+  const addColorChangeHandler = event => {
+    setAddColor({
+      ...addColor,
+      [event.target.name]: event.target.name === "code" ? {hex: event.target.value} : event.target.value  
+    });
+  };
 
   const editColor = color => {
     setEditing(true);
@@ -24,7 +49,6 @@ const ColorList = ({ colors, updateColors, setDependency }) => {
     // where is is saved right now?
     axiosWithAuth().put("http://localhost:5000/api/colors/" + colorToEdit.id, colorToEdit)
     .then(res =>{
-      console.log(res);
       setDependency(true);
     })
     .catch(err => {
@@ -36,7 +60,6 @@ const ColorList = ({ colors, updateColors, setDependency }) => {
     // make a delete request to delete this color
     axiosWithAuth().delete("http://localhost:5000/api/colors/" + colorToEdit.id)
     .then(res => {
-      console.log(res);
       setDependency(true);
     })
     .catch(err => {
@@ -97,6 +120,14 @@ const ColorList = ({ colors, updateColors, setDependency }) => {
           </div>
         </form>
       )}
+      <form onSubmit={addColorSubmitHandler}>
+        <h2>add color</h2>
+        <label htmlFor="color">color name</label>
+        <input type="text" name="color" id="color" value={addColor.name} onChange={addColorChangeHandler} />
+        <label htmlFor="code">color hex</label>
+        <input type="text" name="code" id="code" value={addColor.code.hex} onChange={addColorChangeHandler} />
+        <button type="submit">Submit</button>
+      </form>
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
     </div>
