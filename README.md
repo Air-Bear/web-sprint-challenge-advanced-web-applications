@@ -28,9 +28,23 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. Explain what a token is used for.
+
+  *A token is typically used for authentication. A token is, typically, a hexadecimal collection of characters that is unique.
+
 2. What steps can you take in your web apps to keep your data secure?
+
+  *You can use tokens for authentications, especially tokens that time out on their own, as well as making sure to use best coding practices in order to prevent sensitive code from showing up on the browser console.
+
 3. Describe how web servers work.
+
+  *In broad strokes, there's hardware that stores data and is connected to the internet. When we deploy our data to these servers theres logic that allows that hrdware to make that particular data available at a specific address. There are several layers to routing, URLs, DNS, IP, etc. These layers allow for VERY specific identification. A url is the most familiar layer, and it's simply what we type into an address bar in order to tell our browser our intent to access that site. DNS allows for a website to identify itself in board terms. For example .edu for education, .gov for government, and so on.
+
 4. Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+  C - C, or create, is typically a post method that allows user to add information to the server. 
+  R - R, or read, is typically a get method that allows information to be read from the server for the consumer.
+  U - U, or update, allows users to use a put method in order to update server information.
+  D - D, or delete/destroy, simply uses a delete method in order to remove information from the server.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
 
@@ -61,10 +75,10 @@ Your finished project must include all of the following requirements:
 
 Build a login form to authenticate your users.
 
-- [ ] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
-- [ ] Save the token to localStorage
-- [ ] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
-- [ ] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
+- [x ] Construct an AXIOS request to retrieve a token from the server. You'll use this token to interact with the API
+- [x ] Save the token to localStorage
+- [x ] Build a `axiosWithAuth` module to create an instance of axios with the authentication header
+- [x ] Build a `PrivateRoute` component and use it to protect a route that renders the `BubblesPage` component
 
 #### Stage 2 - Consuming the API
 
